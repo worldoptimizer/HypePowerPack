@@ -7,7 +7,7 @@
 #	v1.0.1 Fixed scope, HypeDocumentLoad in functions()
 #	v1.0.2 limited to id, refactored python, IIFE
 #	v1.0.3 refactored JS, streamline API, replace Eval with new Function
-#	v1.0.4 multi behavior, refactored JS , external functions, closure compiler
+#	v1.0.4 multi behavior, refactored JS , unpack functions, closure compiler
 #
 #
 #	MIT License
@@ -25,8 +25,8 @@ javascript_for_hype_functions = """/**
 * Hype functions defined for HYPE.documents["${hype_id}"]
 */
 
-if("HYPE_functions" in window === false) window.HYPE_functions = Object();
-window.HYPE_functions["${hype_id}"] = Object();
+if("HYPE_functions" in window === false) HYPE_functions = Object();
+HYPE_functions["${hype_id}"] = Object();
 """
 
 javascript_for_actions = """/** 
@@ -36,9 +36,6 @@ javascript_for_actions = """/**
 ;(function () {
 	/* @const */
 	const _standalone = false;
-
-	if("HYPE_functions" in window === false) window.HYPE_functions = Object();
-	window.HYPE_functions["${hype_id}"] = Object();
 
 	if("HYPE_eventListeners" in window === false) window.HYPE_eventListeners = Array();
 	window.HYPE_eventListeners.push({"type":"HypeDocumentLoad", "callback":function (hypeDocument, element, event) {
